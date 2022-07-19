@@ -212,14 +212,29 @@ namespace IPFS_Uploader
                 attributes[i] = newAttribute;
             }
             
-            object metadataObj = new
+            // Now we check if we have some attributes and we add them or not to the final metadata object
+            object metadataObj;
+            
+            if (attributes.Length > 0)
             {
-                name = name,
-                description = desc, 
-                image = imageUrl, 
-                attributes = attributes
-            };
-
+                metadataObj = new
+                {
+                    name = name,
+                    description = desc, 
+                    image = imageUrl, 
+                    attributes = attributes
+                };
+            }
+            else
+            {
+                metadataObj = new
+                {
+                    name = name,
+                    description = desc, 
+                    image = imageUrl
+                };
+            }
+            
             return metadataObj; 
         }
 
