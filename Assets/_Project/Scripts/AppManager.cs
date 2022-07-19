@@ -8,23 +8,88 @@ using MoralisUnity;
 using MoralisUnity.Web3Api.Models;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using JetBrains.Annotations;
+using Pixelplacement;
 
 namespace IPFS_Uploader
 {
-    public class AppManager : MonoBehaviour
+    public class AttributeObject
     {
-        [SerializeField] private SelectionPanel selectionPanel;
+        public int id;
+        [CanBeNull] public string display_type;
+        public string trait_type;
+        public string value;
+    }
+    
+    public class AppManager : StateMachine
+    {
+        [SerializeField] private MainPanel mainPanel;
+        [HideInInspector] public List<AttributeObject> currentAttributeObjects = new List<AttributeObject>();
+
         
+        #region UNITY_LIFECYCLE
+
         private void OnEnable()
         {
-            selectionPanel.UploadButtonPressed += UploadToIpfs;
+            mainPanel.UploadButtonPressed += UploadToIpfs;
+            ERC721Panel.OnSubmittedAttribute += AddAttributeObject;
+            AttributeItem.OnDeleted += DeleteAttributeObject;
         }
 
         private void OnDisable()
         {
-            selectionPanel.UploadButtonPressed -= UploadToIpfs;
+            mainPanel.UploadButtonPressed -= UploadToIpfs;
+            ERC721Panel.OnSubmittedAttribute -= AddAttributeObject;
+            AttributeItem.OnDeleted -= DeleteAttributeObject;
+        }
+
+        #endregion
+
+        
+        #region PUBLIC_METHODS
+
+        public void GoToMainState()
+        {
+            ChangeState("Main");
         }
         
+        public void ViewAttributes()
+        {
+            ChangeState("Attributes");
+        }
+        
+        public void GoToNextState()
+        {
+            Next();
+        }
+        
+        public void BackToPreviousState()
+        {
+            Previous();
+        }
+
+        #endregion
+        
+        
+        #region EVENT_HANDLERS
+        
+        private void AddAttributeObject(AttributeObject obj)
+        {
+            // We add an ID to the object while adding it to the list.
+            obj.id = currentAttributeObjects.Count; //Important!!!!
+            currentAttributeObjects.Add(obj);
+        }
+
+        private void DeleteAttributeObject(AttributeObject obj)
+        {
+            currentAttributeObjects.Remove(obj);
+        }
+
+        #endregion
+        
+
+        #region PRIVATE_METHODS
+
         private async void UploadToIpfs(string imgName, string imgDesc, string imgPath, byte[] imgData)
         {
             // We are replacing any space for an empty
@@ -34,7 +99,7 @@ namespace IPFS_Uploader
             if (string.IsNullOrEmpty(ipfsImagePath))
             {
                 Debug.Log("Failed to save image to IPFS");
-                selectionPanel.ResetUploadButton();
+                mainPanel.ResetUploadButton();
                 return;
             }
             
@@ -56,13 +121,13 @@ namespace IPFS_Uploader
             if (ipfsMetadataPath == null)
             {
                 Debug.Log("Failed to save metadata to IPFS");
-                selectionPanel.ResetUploadButton();
+                mainPanel.ResetUploadButton();
                 return;
             }
             
             Debug.Log("Metadata saved successfully to IPFS:");
             Debug.Log(ipfsMetadataPath);
-            selectionPanel.ResetUploadButton();
+            mainPanel.ResetUploadButton();
         }
         
         
@@ -103,9 +168,37 @@ namespace IPFS_Uploader
 
         private static object BuildMetadata(string name, string desc, string imageUrl)
         {
-            object obj = new { name = name, description = desc, image = imageUrl };
+            object attribute = new
+            {
+                display_type = "boost_percentage",
+                trait_type = "Movement",
+                value = "60"
+            };
+            
+            object attribute2 = new
+            {
+                display_type = "boost_number",
+                trait_type = "Duration",
+                value = "12"
+            };
+            
+            object[] attributes = new object[2];
+
+            attributes[0] = attribute;
+            attributes[1] = attribute2;
+
+            
+            object obj = new
+            {
+                name = name,
+                description = desc, 
+                image = imageUrl, 
+                attributes = attributes
+            };
 
             return obj; 
         }
+
+        #endregion
     }   
 }

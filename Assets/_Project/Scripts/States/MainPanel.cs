@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using Pixelplacement;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 namespace IPFS_Uploader
 {
-    public class SelectionPanel : MonoBehaviour
+    public class MainPanel : State
     {
         public Action<string, string, string, byte[]> UploadButtonPressed;
 
