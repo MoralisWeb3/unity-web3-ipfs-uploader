@@ -12,17 +12,19 @@ namespace IPFS_Uploader
     {
         public Action<string, string, string, byte[]> UploadButtonPressed;
 
-        [Header("UI Elements")]
-        //[SerializeField] private RawImage image;
+        public AppManager appManager;
+
+        [Header("Metadata Fields")]
         [SerializeField] private Image image;
         [SerializeField] private TMP_InputField nameInput;
         [SerializeField] private TMP_InputField descriptionInput;
-        [SerializeField] private Button uploadButton;
         
+        [Header("Other UI Elements")]
+        [SerializeField] private Button uploadButton;
+
         //Control vars
         private string _imagePath;
         private byte[] _imageData;
-
         private bool _isImageLoaded;
 
 
@@ -38,6 +40,7 @@ namespace IPFS_Uploader
             if (_imagePath.Length == 0)
             {
                 Debug.Log("Image not selected");
+                appManager.SetStatusLabelText("Image not selected");
                 _isImageLoaded = false;
                 return;
             }
@@ -48,6 +51,7 @@ namespace IPFS_Uploader
             if (_imageData == null)
             {
                 Debug.Log("Failed to read image");
+                appManager.SetStatusLabelText("Failed to read image");
                 _isImageLoaded = false;
                 return;   
             }
@@ -57,11 +61,14 @@ namespace IPFS_Uploader
             if (!isLoaded)
             {
                 Debug.Log("Image not loaded");
+                appManager.SetStatusLabelText("Image not loaded");
                 _isImageLoaded = false;
                 return;
             }
                 
             Debug.Log("Image loaded successfully!");
+            appManager.SetStatusLabelText("Image loaded successfully!");
+            
             image.sprite = Sprite.Create(texture, new Rect(0.0f, 0.0f, texture.width, texture.height), new Vector2(0.5f, 0.5f), 100.0f);
             image.preserveAspect = true;
             

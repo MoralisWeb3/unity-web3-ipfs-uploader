@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 using JetBrains.Annotations;
 using Pixelplacement;
+using TMPro;
 
 namespace IPFS_Uploader
 {
@@ -24,6 +26,8 @@ namespace IPFS_Uploader
     public class AppManager : StateMachine
     {
         [SerializeField] private MainPanel mainPanel;
+        [SerializeField] private TextMeshProUGUI statusLabel;
+        
         [HideInInspector] public List<AttributeObject> currentAttributeObjects = new List<AttributeObject>();
 
         
@@ -62,10 +66,11 @@ namespace IPFS_Uploader
         {
             ChangeState("NewAttribute");
         }
-        
-        public void GoToNextState()
+
+        public void SetStatusLabelText(string newText)
         {
-            Next();
+            statusLabel.text = newText;
+            StartCoroutine(ClearStatusLabel());
         }
 
         #endregion
@@ -78,11 +83,14 @@ namespace IPFS_Uploader
             // We add an ID to the object while adding it to the list.
             obj.id = currentAttributeObjects.Count; //Important!!!!
             currentAttributeObjects.Add(obj);
+            
+            SetStatusLabelText("Attribute added!");
         }
 
         private void DeleteAttributeObject(AttributeObject obj)
         {
             currentAttributeObjects.Remove(obj);
+            SetStatusLabelText("Attribute deleted!");
         }
 
         #endregion
@@ -99,12 +107,16 @@ namespace IPFS_Uploader
             if (string.IsNullOrEmpty(ipfsImagePath))
             {
                 Debug.Log("Failed to save image to IPFS");
+                SetStatusLabelText("Failed to save image to IPFS");
+                
                 mainPanel.EnableUploadButton();
                 return;
             }
             
             Debug.Log("Image file saved successfully to IPFS:");
             Debug.Log(ipfsImagePath);
+            
+            SetStatusLabelText("Image file saved successfully to IPFS!");
 
             // Build Metadata
             object metadata = BuildMetadata(imgName, imgDesc, ipfsImagePath);
@@ -121,12 +133,16 @@ namespace IPFS_Uploader
             if (ipfsMetadataPath == null)
             {
                 Debug.Log("Failed to save metadata to IPFS");
+                SetStatusLabelText("Failed to save metadata to IPFS");
+                
                 mainPanel.EnableUploadButton();
                 return;
             }
             
             Debug.Log("Metadata saved successfully to IPFS:");
             Debug.Log(ipfsMetadataPath);
+            
+            SetStatusLabelText("Metadata saved successfully to IPFS!");
             mainPanel.EnableUploadButton();
         }
         
@@ -197,6 +213,12 @@ namespace IPFS_Uploader
             };
 
             return obj; 
+        }
+
+        private IEnumerator ClearStatusLabel()
+        {
+            yield return new WaitForSeconds(3f);
+            statusLabel.text = string.Empty;
         }
 
         #endregion
