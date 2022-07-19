@@ -48,24 +48,24 @@ namespace IPFS_Uploader
         
         #region PUBLIC_METHODS
 
-        public void GoToMainState()
+        public void ToMainState()
         {
             ChangeState("Main");
         }
         
-        public void ViewAttributes()
+        public void ToViewAttributesState()
         {
-            ChangeState("Attributes");
+            ChangeState("ViewAttributes");
+        }
+        
+        public void ToNewAttributeState()
+        {
+            ChangeState("ViewAttributes");
         }
         
         public void GoToNextState()
         {
             Next();
-        }
-        
-        public void BackToPreviousState()
-        {
-            Previous();
         }
 
         #endregion

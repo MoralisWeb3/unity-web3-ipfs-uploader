@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace IPFS_Uploader
 {
-    public class AttributesPanel : State
+    public class ViewAttributesPanel : State
     {
         public AppManager appManager;
         
