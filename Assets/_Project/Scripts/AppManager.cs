@@ -189,12 +189,25 @@ namespace IPFS_Uploader
 
             for (int i = 0; i < attributes.Length; i++)
             {
-                object newAttribute = new
+                object newAttribute;
+                
+                if (string.IsNullOrEmpty(currentAttributeObjects[i].display_type)) // We don't want to add the field display_type if it's empty or null
                 {
-                    display_type = currentAttributeObjects[i].display_type,
-                    trait_type = currentAttributeObjects[i].trait_type,
-                    value = currentAttributeObjects[i].value
-                };
+                    newAttribute = new
+                    {
+                        trait_type = currentAttributeObjects[i].trait_type,
+                        value = currentAttributeObjects[i].value
+                    };   
+                }
+                else
+                {
+                    newAttribute = new
+                    {
+                        display_type = currentAttributeObjects[i].display_type,
+                        trait_type = currentAttributeObjects[i].trait_type,
+                        value = currentAttributeObjects[i].value
+                    };
+                }
 
                 attributes[i] = newAttribute;
             }
