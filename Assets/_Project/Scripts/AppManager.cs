@@ -60,7 +60,7 @@ namespace IPFS_Uploader
         
         public void ToNewAttributeState()
         {
-            ChangeState("ViewAttributes");
+            ChangeState("NewAttribute");
         }
         
         public void GoToNextState()

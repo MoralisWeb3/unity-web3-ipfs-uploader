@@ -1247,7 +1247,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Add attribute:'
+  m_text: Add new attribute
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8bcc740f6853cba4eadeb20771116877, type: 2}
   m_sharedMaterial: {fileID: 525976600066619417, guid: 8bcc740f6853cba4eadeb20771116877, type: 2}
@@ -1274,8 +1274,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1690,7 +1690,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7582086179482937505, guid: a41feed31bcc36541a7a9505212ddc63, type: 3}
       propertyPath: OnConnected.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: GoToMainState
+      value: ToMainState
       objectReference: {fileID: 0}
     - target: {fileID: 7582086179482937505, guid: a41feed31bcc36541a7a9505212ddc63, type: 3}
       propertyPath: OnDisconnected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -1714,7 +1714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7582086179482937505, guid: a41feed31bcc36541a7a9505212ddc63, type: 3}
       propertyPath: OnConnected.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: IPFS_Uploader.IpfsUploader, Assembly-CSharp
+      value: IPFS_Uploader.AppManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7582086179482937505, guid: a41feed31bcc36541a7a9505212ddc63, type: 3}
       propertyPath: OnConnected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
@@ -3486,8 +3486,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 25
-  m_fontSizeBase: 25
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4498,26 +4498,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1941104057}
     m_Modifications:
-    - target: {fileID: 1688041517615383872, guid: f9e051259ac956b42a1fab685b0bd5d2, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688041517615383872, guid: f9e051259ac956b42a1fab685b0bd5d2, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688041517615383872, guid: f9e051259ac956b42a1fab685b0bd5d2, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688041517615383872, guid: f9e051259ac956b42a1fab685b0bd5d2, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688041517615383872, guid: f9e051259ac956b42a1fab685b0bd5d2, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -25
-      objectReference: {fileID: 0}
     - target: {fileID: 1688041518868367234, guid: f9e051259ac956b42a1fab685b0bd5d2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4605,26 +4585,6 @@ PrefabInstance:
     - target: {fileID: 1688041518868367235, guid: f9e051259ac956b42a1fab685b0bd5d2, type: 3}
       propertyPath: m_Name
       value: AttributeField (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688041518967780208, guid: f9e051259ac956b42a1fab685b0bd5d2, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688041518967780208, guid: f9e051259ac956b42a1fab685b0bd5d2, type: 3}
-      propertyPath: m_AnchorMin.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688041518967780208, guid: f9e051259ac956b42a1fab685b0bd5d2, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688041518967780208, guid: f9e051259ac956b42a1fab685b0bd5d2, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 325
-      objectReference: {fileID: 0}
-    - target: {fileID: 1688041518967780208, guid: f9e051259ac956b42a1fab685b0bd5d2, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f9e051259ac956b42a1fab685b0bd5d2, type: 3}
