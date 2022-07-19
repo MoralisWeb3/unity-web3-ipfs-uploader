@@ -37,7 +37,8 @@ namespace IPFS_Uploader
             };
 
             OnSubmittedAttribute?.Invoke(newAttributeObj); // The Manager listens to this event
-
+            
+            ClearFields();
             Previous();
         }
 
@@ -51,6 +52,13 @@ namespace IPFS_Uploader
             {
                 submitButton.interactable = true;
             }
+        }
+
+        private void ClearFields()
+        {
+            displayType.text = string.Empty;
+            traitType.text = string.Empty;
+            value.text = string.Empty;
         }
     }   
 }
