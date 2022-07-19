@@ -32,14 +32,14 @@ namespace IPFS_Uploader
         private void OnEnable()
         {
             mainPanel.UploadButtonPressed += UploadToIpfs;
-            ERC721Panel.OnSubmittedAttribute += AddAttributeObject;
+            NewAttributePanel.OnSubmittedAttribute += AddAttributeObject;
             AttributeItem.OnDeleted += DeleteAttributeObject;
         }
 
         private void OnDisable()
         {
             mainPanel.UploadButtonPressed -= UploadToIpfs;
-            ERC721Panel.OnSubmittedAttribute -= AddAttributeObject;
+            NewAttributePanel.OnSubmittedAttribute -= AddAttributeObject;
             AttributeItem.OnDeleted -= DeleteAttributeObject;
         }
 

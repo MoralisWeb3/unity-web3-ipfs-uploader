@@ -5,9 +5,10 @@ namespace IPFS_Uploader
 {
     public class AttributesPanel : State
     {
-        public Transform contentT;
-
         public AppManager appManager;
+        
+        [Header("UI Elements")]
+        public Transform contentT;
         public AttributeItem attributeItemPrefab;
 
         private void OnEnable()
@@ -18,7 +19,7 @@ namespace IPFS_Uploader
                 Destroy(attribute.gameObject);
             }
             
-            // Then we instantiate all the current attributes in ...
+            // Then we instantiate all the currentAttributeObjects in AppManager as AttributeItems
             foreach (var obj in appManager.currentAttributeObjects)
             {
                 var newAttributeItem = Instantiate(attributeItemPrefab, contentT);

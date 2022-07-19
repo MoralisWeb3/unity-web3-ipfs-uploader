@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 namespace IPFS_Uploader
 {
-    public class ERC721Panel : State
+    public class NewAttributePanel : State
     {
         public static Action<AttributeObject> OnSubmittedAttribute;
         
