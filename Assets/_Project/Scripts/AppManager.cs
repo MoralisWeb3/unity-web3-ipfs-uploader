@@ -99,7 +99,7 @@ namespace IPFS_Uploader
             if (string.IsNullOrEmpty(ipfsImagePath))
             {
                 Debug.Log("Failed to save image to IPFS");
-                mainPanel.ResetUploadButton();
+                mainPanel.EnableUploadButton();
                 return;
             }
             
@@ -121,13 +121,13 @@ namespace IPFS_Uploader
             if (ipfsMetadataPath == null)
             {
                 Debug.Log("Failed to save metadata to IPFS");
-                mainPanel.ResetUploadButton();
+                mainPanel.EnableUploadButton();
                 return;
             }
             
             Debug.Log("Metadata saved successfully to IPFS:");
             Debug.Log(ipfsMetadataPath);
-            mainPanel.ResetUploadButton();
+            mainPanel.EnableUploadButton();
         }
         
         
