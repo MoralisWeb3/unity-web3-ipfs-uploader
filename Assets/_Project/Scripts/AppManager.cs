@@ -182,29 +182,24 @@ namespace IPFS_Uploader
             return await SaveToIpfs(name, Convert.ToBase64String(imageData));
         }
 
-        private static object BuildMetadata(string name, string desc, string imageUrl)
+        private object BuildMetadata(string name, string desc, string imageUrl)
         {
-            object attribute = new
-            {
-                display_type = "boost_percentage",
-                trait_type = "Movement",
-                value = "60"
-            };
-            
-            object attribute2 = new
-            {
-                display_type = "boost_number",
-                trait_type = "Duration",
-                value = "12"
-            };
-            
-            object[] attributes = new object[2];
+            // V2 Magic culminates here! We create the attributes. We build metadataObj from main fields + attributes :)
+            object[] attributes = new object[currentAttributeObjects.Count];
 
-            attributes[0] = attribute;
-            attributes[1] = attribute2;
+            for (int i = 0; i < attributes.Length; i++)
+            {
+                object newAttribute = new
+                {
+                    display_type = currentAttributeObjects[i].display_type,
+                    trait_type = currentAttributeObjects[i].trait_type,
+                    value = currentAttributeObjects[i].value
+                };
 
+                attributes[i] = newAttribute;
+            }
             
-            object obj = new
+            object metadataObj = new
             {
                 name = name,
                 description = desc, 
@@ -212,7 +207,7 @@ namespace IPFS_Uploader
                 attributes = attributes
             };
 
-            return obj; 
+            return metadataObj; 
         }
 
         private IEnumerator ClearStatusLabel()
